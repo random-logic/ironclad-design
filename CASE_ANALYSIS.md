@@ -1,8 +1,25 @@
 # 1
 
+## No env noise
+
 VGG_FACE_2 MAP = 0.6463
+
 CASIA_WEBFACE MAP = 0.3726
 
-# 2
+## Gaussian blur
+VGG_FACE_2 MAP = 0.5575
 
+CASIA_WEBFACE MAP = 
+
+## Resizing
+VGG_FACE_2 MAP = 0.6278
+
+CASIA_WEBFACE MAP = 0.3678
+
+## Brightness adjustment
+VGG_FACE_2 MAP = 0.5506
+
+CASIA_WEBFACE MAP = 0.3561
+
+# 2
 

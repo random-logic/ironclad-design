@@ -1,6 +1,7 @@
 import os
 from typing import List
-
+from PIL import Image, ImageFilter, ImageEnhance
+import io
 import requests
 
 GALLERY_DIR = os.path.join(
@@ -20,6 +21,34 @@ def get_identities_from(directory: str) -> List[str]:
         if os.path.isdir(os.path.join(directory, d))
     ]
 
+def apply_gaussian_blur(image_path: str, radius: float = 2.0) -> io.BytesIO:
+    """Apply Gaussian blur to the image and return as BytesIO."""
+    img = Image.open(image_path)
+    img = img.filter(ImageFilter.GaussianBlur(radius))
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG")
+    buf.seek(0)
+    return buf
+
+def apply_resize(image_path: str, size=(160, 160)) -> io.BytesIO:
+    """Resize the image to the given size and return as BytesIO."""
+    img = Image.open(image_path)
+    img = img.resize(size)
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG")
+    buf.seek(0)
+    return buf
+
+def apply_brightness(image_path: str, factor: float = 1.2) -> io.BytesIO:
+    """Adjust brightness (factor > 1 brighter, < 1 darker) and return as BytesIO."""
+    img = Image.open(image_path)
+    enhancer = ImageEnhance.Brightness(img)
+    img = enhancer.enhance(factor)
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG")
+    buf.seek(0)
+    return buf
+
 def add_identities():
     for identity in get_identities_from(GALLERY_DIR):
         identity_path = os.path.join(GALLERY_DIR, identity)
@@ -29,7 +58,7 @@ def add_identities():
 
 def query_probe(image_path: str, k: int = 5):
     r = requests.post("http://localhost:3000/identify",
-                      files={"image": open(image_path, "rb")},
+                      files={"image": apply_gaussian_blur(image_path)},
                       data={"k": str(k)})
     return r.json()["ranked identities"]
 
@@ -54,7 +83,8 @@ def mean_ap(samples: List[List[bool]]) -> float:
     return sum(ap_at_k(sample) for sample in samples) / m
 
 def main():
-    add_identities()
+    # add_identities()
+    print("Gaussian Blur")
     print(f"MAP: {mean_ap(query_probes())}")
 
 if __name__ == '__main__':
