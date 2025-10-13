@@ -54,6 +54,7 @@ def mean_ap(samples: List[List[bool]]) -> float:
     return sum(ap_at_k(sample) for sample in samples) / m
 
 def main():
+    add_identities()
     print(f"MAP: {mean_ap(query_probes())}")
 
 if __name__ == '__main__':
