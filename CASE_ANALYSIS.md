@@ -1,7 +1,9 @@
 # 1 - Model Performance Comparison: CASIA-WebFace vs. VGGFace2 on the IronClad Dataset
-## Results (Accuracy of Metrics)
 
-Table 1 reports the Mean Average Precision (mAP) for **VGGFace2** and **CASIA-WebFace** across four environmental conditions using a BruteForce nearest neighbor search with Euclidean distance.
+
+## Results
+
+Table 1 reports the Mean Average Precision (mAP) for VGGFace2 and CASIA-WebFace across four environmental conditions using a BruteForce nearest neighbor search with Euclidean distance.
 
 **Table 1.** Comparison of Mean Average Precision (mAP) for VGGFace2 and CASIA-WebFace under different environmental noise conditions on the IronClad dataset.
 
@@ -12,17 +14,17 @@ Table 1 reports the Mean Average Precision (mAP) for **VGGFace2** and **CASIA-We
 | Resizing               | 0.6278       | 0.3678            |
 | Brightness adjustment  | 0.5506       | 0.3561            |
 
-Across all conditions, **VGGFace2 outperforms CASIA-WebFace by ~0.20–0.29 mAP**. This trend is consistent regardless of whether noise is introduced.
+Across all conditions, VGGFace2 outperforms CASIA-WebFace by approximately 0.2–0.3 mAP. This trend is consistent regardless of whether noise is introduced.
 
 ## Impact of Environmental Noise
 
-Environmental degradations reduce performance for both models, but the **relative gap** between the two remains stable:
+Environmental degradations reduce performance for both models, but the relative gap between the two remains stable. Here is how the different environment noises impact the model:
 
-* **Gaussian blur:** VGGFace2 drops from 0.6463 → 0.5575 (−13.7%), CASIA-WebFace drops from 0.3726 → 0.2677 (−28.2%).
-* **Resizing:** VGGFace2 is minimally affected (−2.9%), while CASIA-WebFace also shows a small reduction (−1.3%).
-* **Brightness adjustment:** Both models degrade substantially, with VGGFace2 falling 14.8% and CASIA-WebFace 4.4%.
+* **Gaussian blur:** VGGFace2 drops from 0.6463 to 0.5575 (−13.7%) and CASIA-WebFace drops from 0.3726 to 0.2677 (−28.2%). Generally, VGGFace2 is more resilient to this type of noise than CASIA-WebFace.
+* **Resizing:** VGGFace2 is minimally affected from 0.6463 to 0.6278 (−2.9%), while CASIA-WebFace also shows a small reduction from 0.3726 to 0.3678 (−1.3%). This means that both models are generally resilient towards this type of noise.
+* **Brightness adjustment:** Both models degrade substantially, with VGGFace2 falling 14.8% and CASIA-WebFace 4.4%. Generally CASIA-WebFace is more resilient to this type of noise than VGGFace2, although VGGFace2 still beats CASIA-WebFace in raw accuracy.
 
-VGGFace2 not only achieves **higher baseline accuracy**, but also shows **greater robustness** under the more severe noise settings (Gaussian blur, brightness). CASIA-WebFace demonstrates sharper relative drops and consistently lower mAP values.
+VGGFace2 achieves higher accuracy under both the baseline condition (no environmental noise) and the more severe noise settings (Gaussian blur, brightness). CASIA-WebFace demonstrates consistently lower mAP values.
 
 ## Model Selection Argument
 
