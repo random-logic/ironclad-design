@@ -11,28 +11,21 @@ euclidean metric
 | Resizing               | 0.6278       | 0.3678            |
 | Brightness adjustment  | 0.5506       | 0.3561            |
 
+
+
 # 2
 VGG FACE, euclidean metric
 
-## Brute Force
+
+
+## LSH (PC)
 Time Add Identities (s):
-0.033447265625
+0.15897607803344727
 Mem footprint (GB):
-0.00432
+0.000277978
 Time Query Probes (s/query):
-0.11519265174865723
+0.11302042007446289
 Max queries/s:
-8.681109296641022
-
-## HNSW
-Time Add Identities (s):
-0.3884561061859131
-Mem footprint (GB):
-0.004893197
-Time Query Probes (s/query):
-0.14606595039367676
-Max queries/s:
-6.846222526911997
-
-## LSH
-
+8.847958619700364
+mAP:
+0.38624374374374376

@@ -4,12 +4,12 @@ import requests
 from analysis.task1 import query_probes, mean_ap
 
 GALLERY_DIR = os.path.join(
-    'multi_image_identities',
+    'storage',
     'multi_image_gallery'
 )
 
 PROBE_DIR = os.path.join(
-    'multi_image_identities',
+    'storage',
     'probe'
 )
 
@@ -59,8 +59,8 @@ def main():
     print(search_time)
     print("Max queries/s:")
     print(1/search_time)
-    # print("mAP:")
-    # print(mean_ap(query_probes()))
+    print("mAP:")
+    print(mean_ap(query_probes()))
 
 if __name__ == "__main__":
     main()

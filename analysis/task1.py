@@ -5,12 +5,12 @@ import io
 import requests
 
 GALLERY_DIR = os.path.join(
-    'multi_image_identities',
+    'storage',
     'multi_image_gallery'
 )
 
 PROBE_DIR = os.path.join(
-    'multi_image_identities',
+    'storage',
     'probe'
 )
 
