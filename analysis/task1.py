@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import List, Sequence
 from PIL import Image, ImageFilter, ImageEnhance
 import io
 import requests
@@ -62,23 +62,23 @@ def query_probe(image_path: str, k: int = 5):
                       data={"k": str(k)})
     return r.json()["ranked identities"]
 
-def query_probes() -> List[List[bool]]:
+def query_probes(k: int = 5) -> List[List[bool]]:
     res = []
 
     for identity in get_identities_from(PROBE_DIR):
         identity_path = os.path.join(PROBE_DIR, identity)
         for file in os.listdir(identity_path):
             image_path = os.path.join(identity_path, file)
-            res.append([identity == file_name[:-5] for file_name in query_probe(image_path, k=5)])
+            res.append([identity == file_name[:-5] for file_name in query_probe(image_path, k=k)])
 
     return res
 
-def ap_at_k(sample: List[bool]) -> float:
+def ap_at_k(sample: Sequence[bool]) -> float:
     precision = sum(1 / (i + 1) for i, item in enumerate(sample) if item)
     total_relevant_items = sum(1 for item in sample if item)
     return precision / total_relevant_items if total_relevant_items > 0 else 0
 
-def mean_ap(samples: List[List[bool]]) -> float:
+def mean_ap(samples: Sequence[Sequence[bool]]) -> float:
     m = len(samples)
     return sum(ap_at_k(sample) for sample in samples) / m
 
