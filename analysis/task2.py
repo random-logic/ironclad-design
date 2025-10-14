@@ -37,14 +37,14 @@ def time_query_probe(image_path: str, k: int = 5) -> float:
                       data={"k": str(k)})
     return r.json().get("search_time")
 
-def time_query_probes() -> float:
+def time_query_probes(k: int = 5) -> float:
     res = 0.0
 
     for identity in get_identities_from(PROBE_DIR):
         identity_path = os.path.join(PROBE_DIR, identity)
         for file in os.listdir(identity_path):
             image_path = os.path.join(identity_path, file)
-            res += time_query_probe(image_path, k=5)
+            res += time_query_probe(image_path, k=k)
 
     return res
 

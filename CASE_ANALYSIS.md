@@ -51,6 +51,31 @@ mAP for k = 4: 0.6528333889445
 mAP for k = 5: 0.6463371705038372
 mAP for k = 6: 0.6392492492492493
 
+Time Query Probes k=1 (s/query):
+0.33155179023742676
+Max queries/s:
+3.0161200435198747
+Time Query Probes k=2 (s/query):
+0.3319120407104492
+Max queries/s:
+3.012846409125519
+Time Query Probes k=3 (s/query):
+0.33565402030944824
+Max queries/s:
+2.979258222732067
+Time Query Probes k=4 (s/query):
+0.37056922912597656
+Max queries/s:
+2.6985510976143297
+Time Query Probes k=5 (s/query):
+0.3569221496582031
+Max queries/s:
+2.8017314166622134
+Time Query Probes k=6 (s/query):
+0.363372802734375
+Max queries/s:
+2.751994625010498
+
 ## HNSW
 mAP for k = 1: 0.7087087087087087
 mAP for k = 2: 0.6784284284284284
@@ -58,6 +83,31 @@ mAP for k = 3: 0.6617172728283839
 mAP for k = 4: 0.652416305194083
 mAP for k = 5: 0.6459200867534202
 mAP for k = 6: 0.6388321654988323
+
+Time Query Probes k=1 (s/query):
+0.16589760780334473
+Max queries/s:
+6.027814464843891
+Time Query Probes k=2 (s/query):
+0.16782307624816895
+Max queries/s:
+5.958656117834752
+Time Query Probes k=3 (s/query):
+0.1672046184539795
+Max queries/s:
+5.980696043244969
+Time Query Probes k=4 (s/query):
+0.17226457595825195
+Max queries/s:
+5.805024012843758
+Time Query Probes k=5 (s/query):
+0.17177915573120117
+Max queries/s:
+5.821428075736925
+Time Query Probes k=6 (s/query):
+0.17272377014160156
+Max queries/s:
+5.789591086277151
 
 ## LSH
 mAP for k = 1: 0.4874874874874875
@@ -67,9 +117,98 @@ mAP for k = 4: 0.4833931153375598
 mAP for k = 5: 0.4789828717606495
 mAP for k = 6: 0.47536063841619397
 
-# CASIA
-## HNSW
+Time Query Probes k=1 (s/query):
+0.0946969985961914
+Max queries/s:
+10.559996777344734
+Time Query Probes k=2 (s/query):
+0.09528446197509766
+Max queries/s:
+10.49489055478266
+Time Query Probes k=3 (s/query):
+0.09513163566589355
+Max queries/s:
+10.511750302623236
+Time Query Probes k=4 (s/query):
+0.09614157676696777
+Max queries/s:
+10.401327226240989
+Time Query Probes k=5 (s/query):
+0.09613752365112305
+Max queries/s:
+10.401765741636288
+Time Query Probes k=6 (s/query):
+0.09698939323425293
+Max queries/s:
+10.310405773802062
 
+# CASIA
+## Brute Force
+mAP for k = 1: 0.36236236236236236
+mAP for k = 2: 0.37737737737737737
+mAP for k = 3: 0.3732065398732065
+mAP for k = 4: 0.36973779334890444
+mAP for k = 5: 0.3687159381603826
+mAP for k = 6: 0.36507146034923815
+
+Latency:
+Time Query Probes k=1 (s/query):
+0.1902329921722412
+Max queries/s:
+5.256711722720408
+Time Query Probes k=2 (s/query):
+0.19202446937561035
+Max queries/s:
+5.207669643622061
+Time Query Probes k=3 (s/query):
+0.19638395309448242
+Max queries/s:
+5.09206574286082
+Time Query Probes k=4 (s/query):
+0.1935405731201172
+Max queries/s:
+5.1668752648539975
+Time Query Probes k=5 (s/query):
+0.19339418411254883
+Max queries/s:
+5.170786311847072
+Time Query Probes k=6 (s/query):
+0.19490790367126465
+Max queries/s:
+5.130628266807584
+
+## HNSW
+mAP for k = 1: 0.36236236236236236
+mAP for k = 2: 0.37737737737737737
+mAP for k = 3: 0.3732065398732065
+mAP for k = 4: 0.36973779334890444
+mAP for k = 5: 0.3687159381603826
+mAP for k = 6: 0.36507146034923815
+
+Time Query Probes k=1 (s/query):
+0.17960000038146973
+Max queries/s:
+5.56792871868599
+Time Query Probes k=2 (s/query):
+0.18270039558410645
+Max queries/s:
+5.473441898157512
+Time Query Probes k=3 (s/query):
+0.18291568756103516
+Max queries/s:
+5.466999650679611
+Time Query Probes k=4 (s/query):
+0.1829373836517334
+Max queries/s:
+5.46635127297845
+Time Query Probes k=5 (s/query):
+0.1844487190246582
+Max queries/s:
+5.421561099951656
+Time Query Probes k=6 (s/query):
+0.1818242073059082
+Max queries/s:
+5.499817735036571
 
 ## LSH
 mAP for k = 1: 0.12112112112112113
@@ -78,3 +217,28 @@ mAP for k = 3: 0.148120342564787
 mAP for k = 4: 0.15320876431987543
 mAP for k = 5: 0.15475308641975308
 mAP for k = 6: 0.15637276165053943
+
+Time Query Probes k=1 (s/query):
+0.09814119338989258
+Max queries/s:
+10.189401264229874
+Time Query Probes k=2 (s/query):
+0.09399151802062988
+Max queries/s:
+10.639257893254936
+Time Query Probes k=3 (s/query):
+0.09186959266662598
+Max queries/s:
+10.884994381424704
+Time Query Probes k=4 (s/query):
+0.09491682052612305
+Max queries/s:
+10.53554042852478
+Time Query Probes k=5 (s/query):
+0.09609413146972656
+Max queries/s:
+10.406462753815923
+Time Query Probes k=6 (s/query):
+0.09665608406066895
+Max queries/s:
+10.34596021262688
