@@ -8,7 +8,7 @@ Table 1 reports the Mean Average Precision (mAP) for VGGFace2 and CASIA-WebFace 
 **Table 1.** Comparison of Mean Average Precision (mAP) for VGGFace2 and CASIA-WebFace under different environmental noise conditions on the IronClad dataset.
 
 | Condition              | VGGFace2 mAP | CASIA-WebFace mAP |
-| ---------------------- | ------------ | ----------------- |
+|------------------------|--------------|-------------------|
 | No environmental noise | 0.6463       | 0.3726            |
 | Gaussian blur          | 0.5575       | 0.2677            |
 | Resizing               | 0.6278       | 0.3678            |
@@ -42,41 +42,14 @@ VGG FACE, euclidean metric
 
 CPU = Intel Core i5-11600k
 
-## Brute Force (PC)
-Time Add Identities (s):
-0.06016826629638672
-Mem footprint (GB):
-0.004320187
-Time Query Probes (s/query):
-0.2521541118621826
-Max queries/s:
-3.965828645882087
-mAP:
-0.6463371705038372
+| Metric                  | Brute Force | HNSW (PC) | LSH (PC) |
+|-------------------------|-------------|-----------|----------|
+| Time Add Identities (s) | 0.0602      | 0.3072    | 0.1590   |
+| Mem footprint (GB)      | 0.0043      | 0.0049    | 0.0003   |
+| Time Query Probes (s/q) | 0.2522      | 0.1728    | 0.1130   |
+| Max queries/s           | 3.9658      | 5.7867    | 8.8480   |
+| mAP                     | 0.6463      | 0.5575    | 0.3862   |
 
-## HNSW (PC)
-Time Add Identities (s):
-0.30722951889038086
-Mem footprint (GB):
-0.004893197
-Time Query Probes (s/query):
-0.17280960083007812
-Max queries/s:
-5.786715525043597
-mAP:
-0.5575102880658436
-
-## LSH (PC)
-Time Add Identities (s):
-0.15897607803344727
-Mem footprint (GB):
-0.000277978
-Time Query Probes (s/query):
-0.11302042007446289
-Max queries/s:
-8.847958619700364
-mAP:
-0.38624374374374376
 
 # 3
 ## Brute Force
