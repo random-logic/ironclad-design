@@ -58,7 +58,7 @@ def add_identities():
 
 def query_probe(image_path: str, k: int = 5):
     r = requests.post("http://localhost:3000/identify",
-                      files={"image": apply_gaussian_blur(image_path)},
+                      files={"image": open(image_path, 'rb')},
                       data={"k": str(k)})
     return r.json()["ranked identities"]
 
@@ -84,7 +84,6 @@ def mean_ap(samples: List[List[bool]]) -> float:
 
 def main():
     # add_identities()
-    print("Gaussian Blur")
     print(f"MAP: {mean_ap(query_probes())}")
 
 if __name__ == '__main__':
