@@ -41,10 +41,10 @@ CPU = Intel Core i5-11600k
 
 
 # 3
-# VGGFace2
 
-## Brute Force
-**Table: VGGFace2 – Brute Force Results (per k value)**
+
+## VGGFace2 and Brute Force
+**Table 3-1.** Comparison of performance on different k values using VGGFace2 and Brute Force Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
 |---|--------|--------------------|---------------|
@@ -55,8 +55,8 @@ CPU = Intel Core i5-11600k
 | 5 | 0.6463 | 0.3569             | 2.8017        |
 | 6 | 0.6392 | 0.3634             | 2.7520        |
 
-## HNSW
-**Table: VGGFace2 – HNSW Results (per k value)**
+## VGGFace2 and HNSW
+**Table 3-2.** Comparison of performance on different k values using VGGFace2 and HNSW Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
 |---|--------|--------------------|---------------|
@@ -67,8 +67,8 @@ CPU = Intel Core i5-11600k
 | 5 | 0.6459 | 0.1718             | 5.8214        |
 | 6 | 0.6388 | 0.1727             | 5.7896        |
 
-## LSH
-**Table: VGGFace2 – LSH Results (per k value)**
+## VGGFace2 and LSH
+**Table 3-3.** Comparison of performance on different k values using VGGFace2 and LSH Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
 |---|--------|--------------------|---------------|
@@ -79,9 +79,8 @@ CPU = Intel Core i5-11600k
 | 5 | 0.4790 | 0.0961             | 10.4018       |
 | 6 | 0.4754 | 0.0970             | 10.3104       |
 
-# CASIA
-## Brute Force
-**Table: CASIA – Brute Force Results (per k value)**
+## CASIA-WebFace and Brute Force
+**Table 3-4.** Comparison of performance on different k values using CASIA-WebFace and Brute Force Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
 |---|--------|--------------------|---------------|
@@ -92,8 +91,8 @@ CPU = Intel Core i5-11600k
 | 5 | 0.3687 | 0.1934             | 5.1708        |
 | 6 | 0.3651 | 0.1949             | 5.1306        |
 
-## HNSW
-**Table: CASIA – HNSW Results (per k value)**
+## CASIA-WebFace and HNSW
+**Table 3-5.** Comparison of performance on different k values using CASIA-WebFace and HNSW Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
 |---|--------|--------------------|---------------|
@@ -104,8 +103,8 @@ CPU = Intel Core i5-11600k
 | 5 | 0.3687 | 0.1844             | 5.4216        |
 | 6 | 0.3651 | 0.1818             | 5.4998        |
 
-## LSH
-**Table: CASIA – LSH Results (per k value)**
+## CASIA-WebFace and LSH
+**Table 3-6.** Comparison of performance on different k values using CASIA-WebFace and LSH Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
 |---|--------|--------------------|---------------|
@@ -118,11 +117,11 @@ CPU = Intel Core i5-11600k
 
 # 4
 
-# VGGFace
+## VGGFace
 ![VGGFace Results](imgs/task4-vggface.png)
 
 
-## TODO - Casia-Webface
+## TODO - CASIA-WebFace
 
 # 5
 Worst Performing Identities: ['Abdullatif_Sener', 'Adam_Scott', 'Adolfo_Rodriguez_Saa', 'Adrian_McPherson', 'Ahmad_Masood', 'Alberto_Ruiz_Gallardon', 'Aldo_Paredes', 'Alejandro_Avila', 'Alexandra_Vodjanikova', 'Alicia_Silverstone', 'Amram_Mitzna', 'Andrew_Bunner', 'Andrew_Cuomo', 'Andrew_Niccol', 'Angela_Lansbury', 'Anna_Nicole_Smith', 'Annette_Lu', 'Arianna_Huffington', 'Arnaud_Clement', 'Augusto_Roa_Bastos']
