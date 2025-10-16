@@ -44,204 +44,77 @@ CPU = Intel Core i5-11600k
 # VGGFace2
 
 ## Brute Force
-mAP for k = 1: 0.7087087087087087
-mAP for k = 2: 0.678928928928929
-mAP for k = 3: 0.6618841063285508
-mAP for k = 4: 0.6528333889445
-mAP for k = 5: 0.6463371705038372
-mAP for k = 6: 0.6392492492492493
+**Table: VGGFace2 – Brute Force Results (per k value)**
 
-Time Query Probes k=1 (s/query):
-0.33155179023742676
-Max queries/s:
-3.0161200435198747
-Time Query Probes k=2 (s/query):
-0.3319120407104492
-Max queries/s:
-3.012846409125519
-Time Query Probes k=3 (s/query):
-0.33565402030944824
-Max queries/s:
-2.979258222732067
-Time Query Probes k=4 (s/query):
-0.37056922912597656
-Max queries/s:
-2.6985510976143297
-Time Query Probes k=5 (s/query):
-0.3569221496582031
-Max queries/s:
-2.8017314166622134
-Time Query Probes k=6 (s/query):
-0.363372802734375
-Max queries/s:
-2.751994625010498
+| k | mAP    | Time per Query (s) | Max Queries/s |
+|---|--------|--------------------|---------------|
+| 1 | 0.7087 | 0.3316             | 3.0161        |
+| 2 | 0.6789 | 0.3319             | 3.0128        |
+| 3 | 0.6619 | 0.3357             | 2.9793        |
+| 4 | 0.6528 | 0.3706             | 2.6986        |
+| 5 | 0.6463 | 0.3569             | 2.8017        |
+| 6 | 0.6392 | 0.3634             | 2.7520        |
 
 ## HNSW
-mAP for k = 1: 0.7087087087087087
-mAP for k = 2: 0.6784284284284284
-mAP for k = 3: 0.6617172728283839
-mAP for k = 4: 0.652416305194083
-mAP for k = 5: 0.6459200867534202
-mAP for k = 6: 0.6388321654988323
+**Table: VGGFace2 – HNSW Results (per k value)**
 
-Time Query Probes k=1 (s/query):
-0.16589760780334473
-Max queries/s:
-6.027814464843891
-Time Query Probes k=2 (s/query):
-0.16782307624816895
-Max queries/s:
-5.958656117834752
-Time Query Probes k=3 (s/query):
-0.1672046184539795
-Max queries/s:
-5.980696043244969
-Time Query Probes k=4 (s/query):
-0.17226457595825195
-Max queries/s:
-5.805024012843758
-Time Query Probes k=5 (s/query):
-0.17177915573120117
-Max queries/s:
-5.821428075736925
-Time Query Probes k=6 (s/query):
-0.17272377014160156
-Max queries/s:
-5.789591086277151
+| k | mAP    | Time per Query (s) | Max Queries/s |
+|---|--------|--------------------|---------------|
+| 1 | 0.7087 | 0.1659             | 6.0278        |
+| 2 | 0.6784 | 0.1678             | 5.9587        |
+| 3 | 0.6617 | 0.1672             | 5.9807        |
+| 4 | 0.6524 | 0.1723             | 5.8050        |
+| 5 | 0.6459 | 0.1718             | 5.8214        |
+| 6 | 0.6388 | 0.1727             | 5.7896        |
 
 ## LSH
-mAP for k = 1: 0.4874874874874875
-mAP for k = 2: 0.493993993993994
-mAP for k = 3: 0.4902958514069625
-mAP for k = 4: 0.4833931153375598
-mAP for k = 5: 0.4789828717606495
-mAP for k = 6: 0.47536063841619397
+**Table: VGGFace2 – LSH Results (per k value)**
 
-Time Query Probes k=1 (s/query):
-0.0946969985961914
-Max queries/s:
-10.559996777344734
-Time Query Probes k=2 (s/query):
-0.09528446197509766
-Max queries/s:
-10.49489055478266
-Time Query Probes k=3 (s/query):
-0.09513163566589355
-Max queries/s:
-10.511750302623236
-Time Query Probes k=4 (s/query):
-0.09614157676696777
-Max queries/s:
-10.401327226240989
-Time Query Probes k=5 (s/query):
-0.09613752365112305
-Max queries/s:
-10.401765741636288
-Time Query Probes k=6 (s/query):
-0.09698939323425293
-Max queries/s:
-10.310405773802062
+| k | mAP    | Time per Query (s) | Max Queries/s |
+|---|--------|--------------------|---------------|
+| 1 | 0.4875 | 0.0947             | 10.5600       |
+| 2 | 0.4940 | 0.0953             | 10.4949       |
+| 3 | 0.4903 | 0.0951             | 10.5118       |
+| 4 | 0.4834 | 0.0961             | 10.4013       |
+| 5 | 0.4790 | 0.0961             | 10.4018       |
+| 6 | 0.4754 | 0.0970             | 10.3104       |
 
 # CASIA
 ## Brute Force
-mAP for k = 1: 0.36236236236236236
-mAP for k = 2: 0.37737737737737737
-mAP for k = 3: 0.3732065398732065
-mAP for k = 4: 0.36973779334890444
-mAP for k = 5: 0.3687159381603826
-mAP for k = 6: 0.36507146034923815
+**Table: CASIA – Brute Force Results (per k value)**
 
-Latency:
-Time Query Probes k=1 (s/query):
-0.1902329921722412
-Max queries/s:
-5.256711722720408
-Time Query Probes k=2 (s/query):
-0.19202446937561035
-Max queries/s:
-5.207669643622061
-Time Query Probes k=3 (s/query):
-0.19638395309448242
-Max queries/s:
-5.09206574286082
-Time Query Probes k=4 (s/query):
-0.1935405731201172
-Max queries/s:
-5.1668752648539975
-Time Query Probes k=5 (s/query):
-0.19339418411254883
-Max queries/s:
-5.170786311847072
-Time Query Probes k=6 (s/query):
-0.19490790367126465
-Max queries/s:
-5.130628266807584
+| k | mAP    | Time per Query (s) | Max Queries/s |
+|---|--------|--------------------|---------------|
+| 1 | 0.3624 | 0.1902             | 5.2567        |
+| 2 | 0.3774 | 0.1920             | 5.2077        |
+| 3 | 0.3732 | 0.1964             | 5.0921        |
+| 4 | 0.3697 | 0.1935             | 5.1669        |
+| 5 | 0.3687 | 0.1934             | 5.1708        |
+| 6 | 0.3651 | 0.1949             | 5.1306        |
 
 ## HNSW
-mAP for k = 1: 0.36236236236236236
-mAP for k = 2: 0.37737737737737737
-mAP for k = 3: 0.3732065398732065
-mAP for k = 4: 0.36973779334890444
-mAP for k = 5: 0.3687159381603826
-mAP for k = 6: 0.36507146034923815
+**Table: CASIA – HNSW Results (per k value)**
 
-Time Query Probes k=1 (s/query):
-0.17960000038146973
-Max queries/s:
-5.56792871868599
-Time Query Probes k=2 (s/query):
-0.18270039558410645
-Max queries/s:
-5.473441898157512
-Time Query Probes k=3 (s/query):
-0.18291568756103516
-Max queries/s:
-5.466999650679611
-Time Query Probes k=4 (s/query):
-0.1829373836517334
-Max queries/s:
-5.46635127297845
-Time Query Probes k=5 (s/query):
-0.1844487190246582
-Max queries/s:
-5.421561099951656
-Time Query Probes k=6 (s/query):
-0.1818242073059082
-Max queries/s:
-5.499817735036571
+| k | mAP    | Time per Query (s) | Max Queries/s |
+|---|--------|--------------------|---------------|
+| 1 | 0.3624 | 0.1796             | 5.5679        |
+| 2 | 0.3774 | 0.1827             | 5.4734        |
+| 3 | 0.3732 | 0.1829             | 5.4670        |
+| 4 | 0.3697 | 0.1829             | 5.4664        |
+| 5 | 0.3687 | 0.1844             | 5.4216        |
+| 6 | 0.3651 | 0.1818             | 5.4998        |
 
 ## LSH
-mAP for k = 1: 0.12112112112112113
-mAP for k = 2: 0.14214214214214213
-mAP for k = 3: 0.148120342564787
-mAP for k = 4: 0.15320876431987543
-mAP for k = 5: 0.15475308641975308
-mAP for k = 6: 0.15637276165053943
+**Table: CASIA – LSH Results (per k value)**
 
-Time Query Probes k=1 (s/query):
-0.09814119338989258
-Max queries/s:
-10.189401264229874
-Time Query Probes k=2 (s/query):
-0.09399151802062988
-Max queries/s:
-10.639257893254936
-Time Query Probes k=3 (s/query):
-0.09186959266662598
-Max queries/s:
-10.884994381424704
-Time Query Probes k=4 (s/query):
-0.09491682052612305
-Max queries/s:
-10.53554042852478
-Time Query Probes k=5 (s/query):
-0.09609413146972656
-Max queries/s:
-10.406462753815923
-Time Query Probes k=6 (s/query):
-0.09665608406066895
-Max queries/s:
-10.34596021262688
+| k | mAP    | Time per Query (s) | Max Queries/s |
+|---|--------|--------------------|---------------|
+| 1 | 0.1211 | 0.0981             | 10.1894       |
+| 2 | 0.1421 | 0.0940             | 10.6393       |
+| 3 | 0.1481 | 0.0919             | 10.8850       |
+| 4 | 0.1532 | 0.0949             | 10.5355       |
+| 5 | 0.1548 | 0.0961             | 10.4065       |
+| 6 | 0.1564 | 0.0967             | 10.3460       |
 
 # 4
 # VGGFace
