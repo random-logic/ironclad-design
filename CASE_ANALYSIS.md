@@ -217,4 +217,6 @@ MAP: 0.9587628865979382
 ## TODO - Casia-Webface
 
 # 5
+Worst Performing Identities: ['Abdullatif_Sener', 'Adam_Scott', 'Adolfo_Rodriguez_Saa', 'Adrian_McPherson', 'Ahmad_Masood', 'Alberto_Ruiz_Gallardon', 'Aldo_Paredes', 'Alejandro_Avila', 'Alexandra_Vodjanikova', 'Alicia_Silverstone', 'Amram_Mitzna', 'Andrew_Bunner', 'Andrew_Cuomo', 'Andrew_Niccol', 'Angela_Lansbury', 'Anna_Nicole_Smith', 'Annette_Lu', 'Arianna_Huffington', 'Arnaud_Clement', 'Augusto_Roa_Bastos']
 
+Best Performing Identities: ['Valery_Giscard_dEstaing', 'Vanessa_Incontrada', 'Venus_Williams', 'Vicente_Fernandez', 'Vicki_Zhao_Wei', 'Vidar_Helgesen', 'Vincent_Brooks', 'Vitali_Klitschko', 'Vladimir_Putin', 'Wang_Yingfan', 'Will_Smith', 'William_Bratton', 'William_Ford_Jr', 'Xanana_Gusmao', 'Yao_Ming', 'Yasar_Yakis', 'Yasser_Arafat', 'Yevgeny_Kafelnikov', 'Yoko_Ono', 'Zoran_Djindjic']
