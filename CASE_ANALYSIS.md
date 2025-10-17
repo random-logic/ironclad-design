@@ -118,6 +118,7 @@ CPU = Intel Core i5-11600k
 # 4
 
 ## VGGFace
+**Figure 4-1.** Comparison of MAP on different values of $m$ where each line represents a subset of identities that has at least $n$ photos in the gallery.
 ![VGGFace Results](imgs/task4-vggface.png)
 
 
