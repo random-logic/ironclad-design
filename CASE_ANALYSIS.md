@@ -55,7 +55,7 @@ Let $k$ be the number of identities returned. The accuracy (mAP) and speed (time
 | 5 | 0.6463 | 0.3569             | 2.8017        |
 | 6 | 0.6392 | 0.3634             | 2.7520        |
 
-Table 3-1 shows that $k = 1$ is the best $k$, as it outperforms other $k$ values in accuracy while maintaining approximately the same speed (within a few milliseconds). When increasing $k$, the system generally does not return more relevant results for a failed guess since accuracy is not gained. Speed only slightly varies between different $k$ values since brute force checks all indices regardless of $k$, so returning more or less results does not meaningfully change the speed of the system.
+Table 3-1 shows that $k = 1$ provides the best performance, achieving the highest accuracy while maintaining nearly identical speed compared to other $k$ values (within a few milliseconds). Because brute force evaluates all indices regardless of $k$, increasing the number of returned identities does not meaningfully affect runtime. Minor speed fluctuations within a few milliseconds are considered within experimental error, as runtime jitter of 1–5 ms is typical on general-purpose systems. Moreover, when $k$ increases, the system generally does not retrieve more relevant identities for failed predictions, so accuracy does not improve.
 
 ### VGGFace2 and HNSW
 **Table 3-2.** Comparison of performance on different k values using VGGFace2 and HNSW Index.
@@ -97,7 +97,7 @@ Table 3-3 shows that $k=3$ outperforms other values of $k$ in terms of accuracy 
 | 5 | 0.3687 | 0.1934             | 5.1708        |
 | 6 | 0.3651 | 0.1949             | 5.1306        |
 
-Table 3-4 shows that $k=2$ has the best accuracy without sacrificing speed.
+Table 3-4 shows that $k=2$ has the best accuracy while maintaining similar speed (within one millisecond).
 
 ### CASIA-WebFace and HNSW
 **Table 3-5.** Comparison of performance on different k values using CASIA-WebFace and HNSW Index.
@@ -111,7 +111,7 @@ Table 3-4 shows that $k=2$ has the best accuracy without sacrificing speed.
 | 5 | 0.3687 | 0.1844             | 5.4216        |
 | 6 | 0.3651 | 0.1818             | 5.4998        |
 
-Table 3-5 shows that $k=2$ has the best accuracy without sacrificing speed.
+Table 3-5 shows that $k=2$ has the best accuracy while maintaining similar speed (within one millisecond).
 
 ### CASIA-WebFace and LSH
 **Table 3-6.** Comparison of performance on different k values using CASIA-WebFace and LSH Index.
@@ -125,7 +125,7 @@ Table 3-5 shows that $k=2$ has the best accuracy without sacrificing speed.
 | 5 | 0.1548 | 0.0961             | 10.4065       |
 | 6 | 0.1564 | 0.0967             | 10.3460       |
 
-Table 3-6 shows that $k=6$ results in the best accuracy.
+Table 3-6 shows that $k=6$ results in the best accuracy while maintaining similar speed (within one millisecond).
 
 ### Analysis
 
