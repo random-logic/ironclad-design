@@ -1,15 +1,30 @@
+import math
 import os
-from typing import Sequence, List, Tuple
+from typing import Sequence, Tuple, List
 
-from analysis.task1 import ap_at_k, PROBE_DIR, get_identities_from, query_probe, add_identities
+from analysis.task1 import ap_at_k, PROBE_DIR, get_identities_from, query_probe
 
 
-def get_identities_with_lowest_and_highest_ap_k(samples: Sequence[Tuple[str, Sequence[bool]]], n = 20) -> Tuple[List[str], List[str]]:
-    all_ap_at_k = [(ap_at_k(sample[1]), sample[0]) for sample in samples]
-    all_ap_at_k.sort()
+def get_identities_with_lowest_and_highest_ap_k(samples: Sequence[Tuple[str, Sequence[bool]]]) -> Tuple[List[str], List[str]]:
+    # Compute AP@k for each sample
+    all_ap_at_k = [ap_at_k(sample[1]) for sample in samples]
 
-    identities_with_lowest = [identity for _, identity in all_ap_at_k[:n]]
-    identities_with_highest = [identity for _, identity in all_ap_at_k[-n:]]
+    # Get min and max AP@k values
+    lowest_ap = min(all_ap_at_k)
+    highest_ap = max(all_ap_at_k)
+
+    # Tolerance for floating-point comparisons
+    eps = 1e-6
+
+    # Get all identities with AP close to the lowest and highest
+    identities_with_lowest = [
+        samples[i][0] for i, ap in enumerate(all_ap_at_k)
+        if math.isclose(ap, lowest_ap, abs_tol=eps)
+    ]
+    identities_with_highest = [
+        samples[i][0] for i, ap in enumerate(all_ap_at_k)
+        if math.isclose(ap, highest_ap, abs_tol=eps)
+    ]
 
     return identities_with_lowest, identities_with_highest
 
@@ -27,7 +42,7 @@ def query_probes_with_identity(k: int = 1) -> List[Tuple[str, List[bool]]]:
 
 
 if __name__ == "__main__":
-    add_identities()
+    # add_identities()
 
     samples = query_probes_with_identity()
     worst_performing_identities, best_performing_identities = get_identities_with_lowest_and_highest_ap_k(samples)
