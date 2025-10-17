@@ -1,7 +1,7 @@
 # 1 - Model Performance Comparison
 To assess the performance of VGGFace2 and CASIA-WebFace, we compare them using the mAP (Mean Average Precision) metric. This metric is superior as it not only measures whether relevant identities are retrieved, but also incorporates the ranking of those identities—penalizing cases where true matches are pushed further down the list. Unlike plain precision, which treats a correct match at rank 1 the same as one at rank 5, mAP rewards models that consistently place relevant items higher in the ranking. Furthermore, it increases as a greater proportion of all relevant identities are included in the retrieved set, making it a more comprehensive evaluation of retrieval quality.
 
-### Results
+#### Results
 **Table 1.** Comparison of mAP for VGGFace2 and CASIA-WebFace under different environmental noise conditions on the IronClad dataset.
 
 | Condition              | VGGFace2 mAP | CASIA-WebFace mAP |
@@ -21,10 +21,10 @@ Environmental degradations reduce performance for both models, but the relative 
 
 VGGFace2 achieves higher accuracy under both the baseline condition (no environmental noise) and the more severe noise settings (Gaussian blur, brightness). CASIA-WebFace demonstrates consistently lower mAP values. Therefore, VGGFace2 should be selected.
 
-# 2 Indexing Selection
+# 2 - Indexing Selection
 To figure out which type of indexing makes the most sense for our production system, we will compare the performance of the different indices. Performance metrics that are considered includes accuracy (mAP), speed (time to add identities and query probes), and memory footprint. 
 
-### Results
+#### Results
 **Table 2.** Comparison of performance on different indexing methods for VGGFace2.
 
 | Performance Metric      | Brute Force | HNSW   | LSH    |
@@ -40,10 +40,10 @@ From the company's requirements, since this is used for security purposes, the a
 
 The indexing recommendation is simple. For the best accuracy, the brute force indexing method should be used. HNSW indexing method should only be considered if the query latency is too high. LSH is not recommended due to the significantly lower accuracy.
 
-# 3
+# 3 - Configuring Number of Identities Returned
+Let $k$ be the number of identities returned. The accuracy (mAP) and speed (time per query and max queries per second) are assessed to determine the best $k$ across different models and indexing methods.
 
-
-## VGGFace2 and Brute Force
+### VGGFace2 and Brute Force
 **Table 3-1.** Comparison of performance on different k values using VGGFace2 and Brute Force Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
@@ -55,7 +55,9 @@ The indexing recommendation is simple. For the best accuracy, the brute force in
 | 5 | 0.6463 | 0.3569             | 2.8017        |
 | 6 | 0.6392 | 0.3634             | 2.7520        |
 
-## VGGFace2 and HNSW
+Table 3-1 shows that $k = 1$ is the best $k$, as it outperforms other $k$ values in accuracy while maintaining approximately the same speed (within a few milliseconds). When increasing $k$, the system generally does not return more relevant results for a failed guess since accuracy is not gained. Speed only slightly varies between different $k$ values since brute force checks all indices regardless of $k$, so returning more or less results does not meaningfully change the speed of the system.
+
+### VGGFace2 and HNSW
 **Table 3-2.** Comparison of performance on different k values using VGGFace2 and HNSW Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
@@ -67,7 +69,9 @@ The indexing recommendation is simple. For the best accuracy, the brute force in
 | 5 | 0.6459 | 0.1718             | 5.8214        |
 | 6 | 0.6388 | 0.1727             | 5.7896        |
 
-## VGGFace2 and LSH
+Table 3-2 shows that $k=1$ outperforms other values of $k$ in terms of both accuracy and speed. This is a similar result found from table 3-1.
+
+### VGGFace2 and LSH
 **Table 3-3.** Comparison of performance on different k values using VGGFace2 and LSH Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
@@ -79,7 +83,9 @@ The indexing recommendation is simple. For the best accuracy, the brute force in
 | 5 | 0.4790 | 0.0961             | 10.4018       |
 | 6 | 0.4754 | 0.0970             | 10.3104       |
 
-## CASIA-WebFace and Brute Force
+Table 3-3 shows that $k=3$ outperforms other values of $k$ in terms of accuracy while maintaining similar speed (within one millisecond). At this $k$ value, it balances the idea of adding more retrieved matches in the case where the next best match could be correct if the initial match is wrong while ensuring that not too many irrelevant results are added.
+
+### CASIA-WebFace and Brute Force
 **Table 3-4.** Comparison of performance on different k values using CASIA-WebFace and Brute Force Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
@@ -91,7 +97,9 @@ The indexing recommendation is simple. For the best accuracy, the brute force in
 | 5 | 0.3687 | 0.1934             | 5.1708        |
 | 6 | 0.3651 | 0.1949             | 5.1306        |
 
-## CASIA-WebFace and HNSW
+Table 3-4 shows that $k=2$ has the best accuracy without sacrificing speed.
+
+### CASIA-WebFace and HNSW
 **Table 3-5.** Comparison of performance on different k values using CASIA-WebFace and HNSW Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
@@ -103,7 +111,9 @@ The indexing recommendation is simple. For the best accuracy, the brute force in
 | 5 | 0.3687 | 0.1844             | 5.4216        |
 | 6 | 0.3651 | 0.1818             | 5.4998        |
 
-## CASIA-WebFace and LSH
+Table 3-5 shows that $k=2$ has the best accuracy without sacrificing speed.
+
+### CASIA-WebFace and LSH
 **Table 3-6.** Comparison of performance on different k values using CASIA-WebFace and LSH Index.
 
 | k | mAP    | Time per Query (s) | Max Queries/s |
@@ -115,14 +125,18 @@ The indexing recommendation is simple. For the best accuracy, the brute force in
 | 5 | 0.1548 | 0.0961             | 10.4065       |
 | 6 | 0.1564 | 0.0967             | 10.3460       |
 
+Table 3-6 shows that $k=6$ results in the best accuracy.
+
+### Analysis
+
 # 4
 
-## VGGFace
+### VGGFace
 **Figure 4-1.** Comparison of MAP on different values of $m$ where each line represents a subset of identities that has at least $n$ photos in the gallery.
 ![VGGFace Results](imgs/task4-vggface.png)
 
 
-## TODO - CASIA-WebFace
+### TODO - CASIA-WebFace
 
 # 5
 Worst Performing Identities: ['Inam-ul-Haq', 'Mark_Cuban', 'Carl_Reiner', 'Demetrius_Ferraciu', 'Max_Mayfield', 'Charles_Schumer', 'David_Wolf', 'Johnny_Depp', 'Jada_Pinkett_Smith', 'Jorge_Batlle', 'Mariah_Carey', 'John_Walsh', 'Claire_Danes', 'Edward_Lu', 'Emile_Lahoud', 'Ernie_Fletcher', 'Mario_Dumont', 'Charlie_Zaa', 'Peter_Arnett', 'Steve_Waugh', 'Warren_Buffett', 'Marcus_Gronholm', 'Thabo_Mbeki', 'Robby_Ginepri', 'Hootie_Johnson', 'Joseph_Ralston', 'Susan_Collins', 'Jon_Gruden', 'Gabriel_Valdes', 'Sean_Astin', 'Jim_Edmonds', 'Lindsey_Graham', 'Butch_Davis', 'Steve_Spurrier', 'Paul_Patton', 'George_Ryan', 'Katie_Harman', 'Daryl_Hannah', 'Felix_Mantilla', 'Kathryn_Bigelow', 'Kosuke_Kitajima', 'Phil_Vassar', 'Maria_Luisa_Mendonca', 'Priscilla_Owen', 'Guillaume_Soro', 'Franz_Beckenbauer', 'James_Franco', 'Beth_Jones', 'John_McEnroe', 'Drew_Barrymore', 'Kirk_Ferentz', 'Laila_Ali', 'Larry_Lindsey', 'Kristanna_Loken', 'Rob_Schneider', 'George_Voinovich', 'Nasser_al-Kidwa', 'Marissa_Jaret_Winokur', 'Chris_Byrd', 'Flavia_Delaroli', 'Tomoko_Hagiwara', 'Juan_Valencia_Osorio', 'John_Taylor', 'Gary_Winnick', 'Justin_Guarini', 'Lon_Kruger', 'Franz_Muentefering', 'Chok_Tong_Goh', 'Cesar_Maia', 'Garry_Trudeau', 'Brendan_Hansen', 'Darrell_Issa', 'Alejandro_Avila', 'Shannon_OBrien', 'Hichiro_Naemura', 'Dennis_Powell', 'Franco_Dragone', 'Patrick_Leahy', 'Michelle_Pfeiffer', 'Jim_Carrey', 'Mary_Landrieu', 'Nora_Bendijo', 'John_F_Kennedy_Jr', 'Vince_Carter', 'Arnaud_Clement', 'David_Leahy', 'Howard_Smith', 'Chung_Mong-joon', 'James_Parker', 'Cristina_Fernandez', 'James_Kopp', 'Jefferson_Perez', 'Stephen_Friedman', 'Darren_Clarke', 'Hashim_Thaci', 'Carlos_Bianchi', 'Jimmy_Carter', 'Jamie_Villafane', 'Dennis_Kozlowski', 'Augusto_Roa_Bastos', 'Richard_Crenna', 'Mark_Geragos', 'Christine_Gregoire', 'Miguel_Contreras', 'Jean-Claude_Braquet', 'Chris_Tucker', 'Mario_Kreutzberger', 'James_Jones', 'James_Gandolfini', 'Eunice_Barber', 'Aldo_Paredes', 'Yukiko_Okudo', 'Elvis_Presley', 'Jesse_James_Leija', 'Mike_Miller', 'Jude_Law', 'Vaclav_Havel', 'Christopher_Patten', 'Brian_Heidik', 'Howard_Schultz', 'Ellen_Engleman', 'Paul_Byrd', 'Jean-Sebastien_Giguere', 'Gillian_Anderson', 'Doug_Collins', 'Charles_Mathews', 'Celso_Amorim', 'Todd_Haynes', 'Edward_Said', 'Emily_Robison', 'Nanni_Moretti', 'Anna_Nicole_Smith', 'Gary_Doer', 'Leslie_Moonves', 'John_Garamendi', 'Warren_Beatty', 'Begum_Khaleda_Zia', 'David_Myers', 'Flor_Montulo', 'Jane_Fonda', 'Ben_Curtis', 'Freddy_Garcia', 'Annette_Lu', 'Hal_Sutton', 'Andrew_Niccol', 'Leszek_Miller', 'Martina_Hingis', 'John_McCallum', 'Dave_Campo', 'Tamara_Brooks', 'Iban_Mayo', 'Courtney_Love', 'Melanie_Griffith', 'Alberto_Ruiz_Gallardon', 'Wesley_Clark', 'Jose_Dirceu', 'Stanley_Tong', 'Frank_Lautenberg', 'Chang_Dae-whan', 'Gordon_Campbell', 'David_Spade', 'Charles_Grassley', 'Lina_Krasnoroutskaya', 'Charlotte_Rampling', 'Bill_Sizemore', 'Ricky_Ponting', 'Sheila_Wellstone', 'Joe_Gatti', 'Goran_Persson', 'Lou_Piniella', 'Tammy_Lynn_Michaels', 'Ferenc_Madl', 'Bernardo_Segura', 'Derek_Lowe', 'Andrew_Cuomo', 'Maggie_Smith', 'Monica_Seles', 'Hermann_Maier', 'Ricardo_Maduro', 'Michael_Ballack', 'Barry_Alvarez', 'Prince_Edward', 'Henrique_Meirelles', 'Amram_Mitzna', 'Andrew_Bunner', 'Alexandra_Vodjanikova', 'Lionel_Richie', 'Denise_Johnson', 'Edward_Norton', 'Janica_Kostelic', 'Darrell_Porter', 'Jong_Thae_Hwa', 'Diana_Taurasi', 'Jessica_Alba', 'Christina_Aguilera', 'Reese_Witherspoon', 'Matthew_Perry', 'Barry_Zito', 'Nicolas_Lapentti', 'Scott_McNealy', 'Gao_Qiang', 'William_Martin', 'James_Traficant', 'Bill_Parcells', 'Brian_Wells', 'Dai_Bachtiar', 'Gil_de_Ferran', 'Kurt_Busch', 'Zarai_Toledo', 'Gro_Harlem_Brundtland', 'Thomas_OBrien', 'Jean-Claude_Juncker', 'Don_Nickles', 'Doug_Duncan', 'Emma_Thompson', 'John_Cusack', 'Pete_Rose', 'Dan_Wheldon', 'Elisabeth_Schumacher', 'Michael_Kostelnik', 'Adrian_McPherson', 'Greg_Ostertag', 'George_Brumley', 'Roman_Polanski', 'Matt_Doherty', 'Adam_Scott', 'Alicia_Silverstone', 'Hun_Sen', 'Adolfo_Rodriguez_Saa', 'Charles_Kartman', 'Zhang_Ziyi', 'Peter_Greenaway', 'Ian_McKellen', 'Edie_Falco', 'Isaiah_Washington', 'Brian_Mulroney', 'Daniela_Hantuchova', 'Manuel_Poggiali', 'Megawati_Sukarnoputri', 'Franko_Simatovic', 'Frances_Fisher', 'Vanessa_Williams', 'Kate_Capshaw', 'Paul_Pierce', 'Guy_Hemmings', 'Tom_Brady', 'Morgan_Freeman', 'Marisa_Tomei', 'Elijah_Wood', 'John_Ruiz', 'John_Rosa', 'Geno_Auriemma', 'Daisy_Fuentes', 'Abdullatif_Sener', 'Luis_Gonzalez_Macchi', 'Ricky_Barnes', 'Arianna_Huffington', 'Angela_Lansbury', 'George_P_Bush', 'Lily_Tomlin', 'Jerry_Falwell', 'Chung_Mong-hun', 'Latrell_Sprewell', 'Jolanta_Kwasniewski', 'Prince_Willem-Alexander', 'Ahmad_Masood', 'Iva_Majoli', 'Ken_Watanabe', 'Thomas_Birmingham', 'William_Hochul', 'Richard_Norton-Taylor', 'Richie_Adubato', 'Jan_Ullrich', 'Princess_Aiko', 'Jessica_Lynch', 'Thierry_Falise', 'Ishaq_Shahryar', 'Mel_Brooks', 'Dick_Vermeil', 'Priscilla_Presley', 'Marlene_Weingartner', 'Fred_Funk', 'Robin_McLaurin_Williams', 'Dick_Cheney', 'Mohamed_Benaissa', 'John_Rowland', 'Lech_Walesa', 'Hideki_Matsui', 'Joe_Dumars', 'Jessica_Lange', 'Jimmy_Kimmel']
