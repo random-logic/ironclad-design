@@ -13,32 +13,32 @@ To assess the performance of VGGFace2 and CASIA-WebFace, we compare them using t
 
 Table 1 reports the Mean Average Precision (mAP) for VGGFace2 and CASIA-WebFace across four environmental conditions using a BruteForce nearest neighbor search with Euclidean distance. Across all conditions, VGGFace2 outperforms CASIA-WebFace by approximately 0.2–0.3 mAP. This trend is consistent regardless of whether noise is introduced.
 
-### Impact of Environmental Noise
-Environmental degradations reduce performance for both models, but the relative gap between the two remains stable. Here is how the different environment noises impact the model:
+Environmental degradations reduce performance for both models, but the relative gap between the two remains stable. Here is how the different environment noises impact the model.
 
 * **Gaussian blur:** VGGFace2 drops from 0.6463 to 0.5575 (−13.7%) and CASIA-WebFace drops from 0.3726 to 0.2677 (−28.2%). Generally, VGGFace2 is more resilient to this type of noise than CASIA-WebFace.
 * **Resizing:** VGGFace2 is minimally affected from 0.6463 to 0.6278 (−2.9%), while CASIA-WebFace also shows a small reduction from 0.3726 to 0.3678 (−1.3%). This means that both models are generally resilient towards this type of noise.
-* **Brightness adjustment:** Both models degrade substantially, with VGGFace2 falling 14.8% and CASIA-WebFace 4.4%. Generally CASIA-WebFace is more resilient to this type of noise than VGGFace2, although VGGFace2 still beats CASIA-WebFace in raw accuracy.
+* **Brightness adjustment:** VGGFace degrades substantially, with accuracy falling from 0.6463 to 0.5506 (-14.8%). On the other hand, CASIA-WebFace only degrades slightly, with accuracy falling from 0.3726 to 0.3561 (-4.4%). Generally CASIA-WebFace is more resilient to this type of noise than VGGFace2, although VGGFace2 still beats CASIA-WebFace in raw accuracy.
 
-
-### Model Selection Argument
 VGGFace2 achieves higher accuracy under both the baseline condition (no environmental noise) and the more severe noise settings (Gaussian blur, brightness). CASIA-WebFace demonstrates consistently lower mAP values. Therefore, VGGFace2 should be selected.
 
-# 2
-VGG FACE, euclidean metric
+# 2 Indexing Selection
+To figure out which type of indexing makes the most sense for our production system, we will compare the performance of the different indices. Performance metrics that are considered includes accuracy (mAP), speed (time to add identities and query probes), and memory footprint. 
 
-CPU = Intel Core i5-11600k
+### Results
+**Table 2.** Comparison of performance on different indexing methods for VGGFace2.
 
-**Table 2.** Comparison of Brute Force, HNSW, and LSH methods on PC in terms of identity addition time, memory footprint, query speed, and retrieval accuracy (mAP).
+| Performance Metric      | Brute Force | HNSW   | LSH    |
+|-------------------------|-------------|--------|--------|
+| mAP                     | 0.6463      | 0.5575 | 0.3862 |
+| Time Add Identities (s) | 0.0602      | 0.3072 | 0.1590 |
+| Mem footprint (GB)      | 0.0043      | 0.0049 | 0.0003 |
+| Time Query Probes (s/q) | 0.2522      | 0.1728 | 0.1130 |
 
-| Metric                  | Brute Force | HNSW (PC) | LSH (PC) |
-|-------------------------|-------------|-----------|----------|
-| Time Add Identities (s) | 0.0602      | 0.3072    | 0.1590   |
-| Mem footprint (GB)      | 0.0043      | 0.0049    | 0.0003   |
-| Time Query Probes (s/q) | 0.2522      | 0.1728    | 0.1130   |
-| Max queries/s           | 3.9658      | 5.7867    | 8.8480   |
-| mAP                     | 0.6463      | 0.5575    | 0.3862   |
+Table 2 summarizes the comparative performance of different indexing methods applied to VGGFace2, evaluated under a controlled environment using an Intel Core i5-11600k processor. While the brute force index has the best accuracy and is the quickest to add identities, it has the slowest query times and a large memory footprint. On the other hand, LSH provides the quickest query time and lowest memory footprint at the cost of accuracy and time to add identities. HNSW offers a balance between Brute Force and LSH in terms of accuracy and query speed, but this has the highest indexing time and memory usage.
 
+From the company's requirements, since this is used for security purposes, the accuracy (mAP) should be the highest priority. Any misidentifications could mean that people without authorization can access sensitive information. The second-largest priority is to minimize the time to query probes for scalability. Too much latency means that the workers are just idling while the system processes the information, resulting in lower productivity. We can also assume that the time to change access control (add identities) is a lower priority because changing access control does not happen not often compared to identity searching on a daily basis. Memory footprint is not a concern unless the server has only a few GB of RAM, which is unlikely for a project of this scale. 
+
+The indexing recommendation is simple. For the best accuracy, the brute force indexing method should be used. HNSW indexing method should only be considered if the query latency is too high. LSH is not recommended due to the significantly lower accuracy.
 
 # 3
 
