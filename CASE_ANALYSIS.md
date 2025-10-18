@@ -139,6 +139,7 @@ When comparing indexing methods, both Brute Force and HNSW achieve similar accur
 Let $m$ represent the number of images each individual has in the gallery. To determine the optimal $m$, we compared performance (mAP) across different $m$ values. To ensure a fair and controlled experiment, we included only individuals with at least $n$ images, where $m \leq n$, so that variations in accuracy were not caused by adding more individuals. To also account for those with fewer images, we repeated this experiment for multiple values of $n$. We also control the indexing method (Brute Force) and the number of relevant results returned ($N = 1$ as this is the optimal value found in section 3).
 
 **Figure 4-1.** Comparison of MAP on different values of $m$ where each line represents a subset of identities that has at least $n$ photos in the gallery.
+
 ![VGGFace Results](imgs/task4-vggface.png)
 
 From Figure 4-1, the optimal $m$ appears to be approximately 3 to 5. This is determined by identifying the “kink” in the mAP curve, where the marginal gains in performance diminish to nearly zero. This range represents a good tradeoff—large enough to provide multiple examples for each identity, but not so high that it introduces unnecessary redundancy or computational overhead. The presence of multiple examples provides greater variation in pose, lighting, and expression, allowing the model to build a more robust representation and find visually similar identities more effectively.
