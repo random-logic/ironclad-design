@@ -56,7 +56,8 @@ def query_probes_with_m_gallery_images(gallery_min_images: int, k: int = 1) -> L
 if __name__ == '__main__':
     print(count_identities())
 
-    m, gallery_min_images = 6, 6
-    print(f'm = {m}, max = {gallery_min_images}')
-    add_identities_with_m_gallery_images(m, gallery_min_images)
-    print(f"MAP: {mean_ap(query_probes_with_m_gallery_images(gallery_min_images))}")
+    gallery_min_images = 10
+    for m in range(1, gallery_min_images + 1):
+        print(f'm = {m}, max = {gallery_min_images}')
+        add_identities_with_m_gallery_images(m, gallery_min_images)
+        print(f"MAP: {mean_ap(query_probes_with_m_gallery_images(gallery_min_images))}")

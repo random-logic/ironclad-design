@@ -144,9 +144,58 @@ Let $m$ represent the number of images each individual has in the gallery. To de
 
 From Figure 4-1, the optimal $m$ appears to be approximately 3 to 5. This is determined by identifying the “kink” in the mAP curve, where the marginal gains in performance diminish to nearly zero. This range represents a good tradeoff—large enough to provide multiple examples for each identity, but not so high that it introduces unnecessary redundancy or computational overhead. The presence of multiple examples provides greater variation in pose, lighting, and expression, allowing the model to build a more robust representation and find visually similar identities more effectively.
 
-Interestingly, $m = 3$ works best for individuals who already have many images in the gallery, while $m = 5$ performs better for those with fewer images. This suggests that individuals with more images are more easily recognized by the system. A possible reason for this is that these individuals are likely more prominent or well-known, increasing the likelihood that the model encountered them during training.
+Interestingly, $m = 3$ or $m = 4$ works best for individuals who already have many images (7 to 10) in the gallery, while $m = 5$ performs better for those with fewer images (less than 7). This suggests that individuals with more images are more easily recognized by the system. A possible reason for this is that these individuals are likely more prominent or well-known, increasing the likelihood that the model encountered them during training.
 
 ### TODO - CASIA-WebFace
+
+**Figure 4-2.** Comparison of MAP on different values of $m$ where each line represents a subset of identities that has at least $n$ photos in the gallery.
+
+m = 1, max = 5
+MAP: 0.4634146341463415
+m = 2, max = 5
+MAP: 0.5121951219512195
+m = 3, max = 5
+MAP: 0.5934959349593496
+m = 4, max = 5
+MAP: 0.6504065040650406
+m = 5, max = 5
+MAP: 0.6991869918699187
+
+m = 1, max = 7
+MAP: 0.5128205128205128
+m = 2, max = 7
+MAP: 0.5512820512820513
+m = 3, max = 7
+MAP: 0.6410256410256411
+m = 4, max = 7
+MAP: 0.6923076923076923
+m = 5, max = 7
+MAP: 0.7564102564102564
+m = 6, max = 7
+MAP: 0.7564102564102564
+m = 7, max = 7
+MAP: 0.7948717948717948
+
+m = 1, max = 10
+MAP: 0.5098039215686274
+m = 2, max = 10
+MAP: 0.5882352941176471
+m = 3, max = 10
+MAP: 0.6862745098039216
+m = 4, max = 10
+MAP: 0.7254901960784313
+m = 5, max = 10
+MAP: 0.803921568627451
+m = 6, max = 10
+MAP: 0.803921568627451
+m = 7, max = 10
+MAP: 0.8431372549019608
+m = 8, max = 10
+MAP: 0.8627450980392157
+m = 9, max = 10
+MAP: 0.8431372549019608
+m = 10, max = 10
+MAP: 0.9019607843137255
 
 # 5
 
