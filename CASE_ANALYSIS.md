@@ -156,6 +156,6 @@ From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 1
 
 # 5 - Uncertainty Estimation
 
-
+![Returned Distances By Performance Groups](imgs/task4-casia-webface.png)
 
 TODO
