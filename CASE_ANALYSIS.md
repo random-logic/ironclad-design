@@ -162,24 +162,28 @@ From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 1
 
 | Name                | Large Brightness / Contrast Difference | Pose / Expression Variation | Unique Face Shape? | mAP  |
 |---------------------|----------------------------------------|-----------------------------|--------------------|------|
-| Inam-ul-Haq         | Y                                      | Y                           | N                  | Low  |
-| Mark Cuban          | Y                                      | Y                           | N                  | Low  |
-| Carl Reiner         | Y                                      | N                           | N                  | Low  |
-| Demetrius Ferraciu  | N                                      | Y                           | N                  | Low  |
-| Max Mayfield        | Y                                      | Y                           | N                  | Low  |
-| Bobby Goldwater     | N                                      | N                           | N                  | High |
-| Yoko Ono            | N                                      | N                           | N                  | High |
-| Slobodan Milosevic  | N                                      | N                           | N                  | High |
-| Saeb Erekat         | M                                      | M                           | Y                  | High |
-| Richard Branson     | M                                      | M                           | Y                  | High |
+| Inam-ul-Haq         | High                                   | High                        | No                 | Low  |
+| Mark Cuban          | High                                   | High                        | No                 | Low  |
+| Carl Reiner         | High                                   | Low                         | No                 | Low  |
+| Demetrius Ferraciu  | Low                                    | High                        | No                 | Low  |
+| Max Mayfield        | High                                   | High                        | No                 | Low  |
+| Bobby Goldwater     | Low                                    | Low                         | No                 | High |
+| Yoko Ono            | Low                                    | Low                         | No                 | High |
+| Slobodan Milosevic  | Low                                    | Low                         | No                 | High |
+| Saeb Erekat         | Moderate                               | Moderate                    | Yes                | High |
+| Richard Branson     | Moderate                               | Moderate                    | Yes                | High |
 
-Table 5-1 shows that the best performing images (with the highest mAP) usually has low brightness, contrast, pose, or expression variation. Whenever there is moderate differences in brightness, contrast, pose, or expression, these images usually compensate that with unique facial shape, making it easier for the ML model to detect the correct matching face. On the other hand, the worst performing images (with the lowest mAP) has either high brightness, contrast, pose or expression variation face shape uniqueness to compensate for this noise. This means that the model performs best when the faces are captured under consistent illumination and camera conditions with similar expressions and minimal variation in head orientation.
+Table 5-1 shows that the best performing images (with the highest mAP) generally exhibit low variation in brightness, contrast, pose, and expression. When there are moderate differences in these characteristics, such images often compensate through distinct facial shapes, allowing the model to more easily identify the correct match. In contrast, the worst performing images (with the lowest mAP) show high variation in brightness, contrast, pose, or expression without any compensating uniqueness in facial structure.
+
+This visual inconsistency leads to higher intra-class variance in the image space, making it harder for the model to correctly identify images. These findings indicate that the model performs best when faces are captured under consistent illumination, pose, and expression—conditions that minimize uncertainty and improve robustness.
 
 ### Behavior in Embedding Space
-**Table 5-2.** The effect of mAP (lowest or highest performing) on the distance to predicted target.
+**Figure 5-2.** Boxplot showing the Euclidean distances between each image and its predicted target image, grouped by performance level (lowest vs. highest mAP). 
 
 ![Returned Distances By Performance Groups](imgs/task5-distances.png)
 
+Table 5-2 shows that the best performing images generally have shorter distances to the target compared to the worst performing images. This indicates that the model’s embeddings for high-performing cases are more tightly clustered around their true identities. This suggests that better performance corresponds to higher embedding consistency and lower intra-class variance.
+
 ### Strategy to Improve Performance
 
-TODO
+
