@@ -1,5 +1,5 @@
 import os
-from typing import List, Sequence
+from typing import List, Sequence, Tuple
 from PIL import Image, ImageFilter, ImageEnhance
 import io
 import requests
@@ -49,12 +49,17 @@ def apply_brightness(image_path: str, factor: float = 1.2) -> io.BytesIO:
     buf.seek(0)
     return buf
 
-def add_identities():
+def add_identities() -> List[Tuple[str, List]]:
+    res: List[Tuple[str, List]] = []
+
     for identity in get_identities_from(GALLERY_DIR):
         identity_path = os.path.join(GALLERY_DIR, identity)
         for file in os.listdir(identity_path):
             image_path = os.path.join(identity_path, file)
-            requests.post("http://localhost:3000/add", files={"image": open(image_path, "rb")}, data={"name": file[:-4]})
+            r = requests.post("http://localhost:3000/add", files={"image": open(image_path, "rb")}, data={"name": file[:-4]})
+            res.append((identity, r.json()["embedding"]))
+
+    return res
 
 def query_probe(image_path: str, k: int = 5):
     r = requests.post("http://localhost:3000/identify",
