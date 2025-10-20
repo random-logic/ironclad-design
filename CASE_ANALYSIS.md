@@ -155,7 +155,7 @@ Interestingly, $m = 3$ or $m = 4$ works best for individuals who already have ma
 From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 10$). In all cases, increasing $m$ led to higher accuracy gain. Diminishing returns starts to be noticeable after $m = 5$, but there is still significant gain to be had for increasing $m$. For example, increasing $m$ from 5 to 10 for those with 10 images seen an mAP increase of approximately $0.1$.
 
 # 5 - Uncertainty Estimation
-
+This section investigates the robustness of the facial recognition system by analyzing uncertainty in both the image space and the embedding space. Specifically, we identify which individuals the system consistently recognizes well and which it struggles with. This is accomplished by examining the visual and structural characteristics that distinguish these cases. By understanding the sources of poor performance, we can diagnose the model’s weaknesses and propose a targeted strategy to mitigate them. Without altering the gallery composition (as in Task 4), we implement and evaluate an augmentation-based robustness design explicitly aimed at reducing performance uncertainty under different environments.
 
 ### Behavior in Image Space
 **Table 5-1.** The effect of image characteristic differences on the mAP. These results were obtained from manual inspection of images with the lowest and highest mAPs.
@@ -182,8 +182,17 @@ This visual inconsistency leads to higher intra-class variance in the image spac
 
 ![Returned Distances By Performance Groups](imgs/task5-distances.png)
 
-Table 5-2 shows that the best performing images generally have shorter distances to the target compared to the worst performing images. This indicates that the model’s embeddings for high-performing cases are more tightly clustered around their true identities. This suggests that better performance corresponds to higher embedding consistency and lower intra-class variance.
+Figure 5-2 shows that the best performing images generally have shorter distances to the target compared to the worst performing images. This indicates that the model’s embeddings for high-performing cases are more tightly clustered around their true identities. This suggests that better performance corresponds to higher embedding consistency and lower intra-class variance.
 
 ### Strategy to Improve Performance
+One way to improve the retrieval performance (mAP) is by augmenting the ground truth images via noise injection. The strategy is that for every ground truth image added to the model, we generate an additional 20 versions with randomized brightness, contrast, and Gaussian blur adjustments. This noise injection method exposes the model to a wider range of visual conditions which previously affected performance (e.g., uneven lighting or low clarity).
 
 
+**Table 5-3.** Comparison of mAP before and after augmentation.
+
+| Condition           | VGGFace2 mAP |
+|---------------------|--------------|
+| Before Augmentation | 0.6463       |
+| After Augmentation  | 0.6742       |
+
+As shown in Table 5-3, the Mean Average Precision (mAP) increased from 0.6463 to 0.6742 after applying augmentation, indicating improved robustness. The improvement confirms that the model generalizes better when there are more ground truth images with diverse and realistic environmental characteristics. This strategy mitigates the uncertainty caused by brightness and contrast fluctuations, leading to more stable embeddings and higher recognition consistency across varying conditions.
