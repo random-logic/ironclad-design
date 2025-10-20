@@ -1,10 +1,11 @@
+(Large Brightness / Contrast Difference, Pose / Expression Variation, Unique Face Shape?)
 
 **Worst Performing Identities**
-- Inam-ul-Haq
-- Mark Cuban
-- Carl Reiner
-- Demetrius Ferraciu
-- Max Mayfield
+- Inam-ul-Haq Y, Y, N
+- Mark Cuban Y, Y, N
+- Carl Reiner Y, N, N
+- Demetrius Ferraciu N, Y, N
+- Max Mayfield Y, Y, N
 - Charles Schumer
 - David Wolf
 - Johnny Depp
@@ -293,11 +294,11 @@
 - Jimmy Kimmel
 
 **Best Performing Identities**
-- Bobby Goldwater
-- Yoko Ono
-- Slobodan Milosevic
-- Saeb Erekat
-- Richard Branson
+- Bobby Goldwater N, N, N
+- Yoko Ono N, N, N
+- Slobodan Milosevic N, N, N
+- Saeb Erekat M, M, Y
+- Richard Branson M, M, Y
 - Bob Colvin
 - Billy Graham
 - Lauren Killian
