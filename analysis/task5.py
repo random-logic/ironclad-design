@@ -1,8 +1,10 @@
 import math
 import os
 from typing import Sequence, Tuple, List
+import numpy as np
+import requests
 
-from analysis.task1 import ap_at_k, PROBE_DIR, get_identities_from, query_probe, add_identities
+from analysis.task1 import ap_at_k, PROBE_DIR, get_identities_from, add_identities
 
 
 def get_identities_with_lowest_and_highest_ap_k(samples: Sequence[Tuple[str, Sequence[bool]]]) -> Tuple[List[str], List[str], float, float]:
@@ -29,16 +31,63 @@ def get_identities_with_lowest_and_highest_ap_k(samples: Sequence[Tuple[str, Seq
     return identities_with_lowest, identities_with_highest, lowest_ap, highest_ap
 
 
-def query_probes_with_identity(k: int = 1) -> List[Tuple[str, List[bool]]]:
+def query_probe(image_path: str, k: int = 5) -> Tuple[List[str], List[float]]:
+    r = requests.post("http://localhost:3000/identify",
+                      files={"image": open(image_path, 'rb')},
+                      data={"k": str(k)})
+    return r.json()["ranked identities"], r.json()["distances"]
+
+
+def query_probes_with_identity(k: int = 1) -> List[Tuple[str, List[bool], List[float]]]:
     res = []
 
     for identity in get_identities_from(PROBE_DIR):
         identity_path = os.path.join(PROBE_DIR, identity)
         for file in os.listdir(identity_path):
             image_path = os.path.join(identity_path, file)
-            res.append((identity, [identity == file_name[:-5] for file_name in query_probe(image_path, k=k)]))
+            q_res = query_probe(image_path, k=k)
+            res.append((identity, [identity == file_name[:-5] for file_name, _ in q_res], q_res[-1]))
 
     return res
+
+
+# TODO - keep?
+def compute_triplet_loss(
+    anchor: np.ndarray,
+    positive: np.ndarray,
+    negative: np.ndarray,
+    margin: float = 0.2,
+    metric: str = "euclidean"
+) -> float:
+    """
+    Compute triplet loss given anchor, positive, and negative embeddings.
+
+    Args:
+        anchor (np.ndarray): Anchor embedding vector of shape (d,).
+        positive (np.ndarray): Positive (similar) embedding vector of shape (d,).
+        negative (np.ndarray): Negative (dissimilar) embedding vector of shape (d,).
+        margin (float): Margin enforcing separation between positive and negative pairs.
+        metric (str): Metric used to compute triplet loss.
+
+    Returns:
+        float: The computed triplet loss value.
+    """
+    if metric == 'cosine':
+        # Normalize vectors
+        anchor = anchor / np.linalg.norm(anchor)
+        positive = positive / np.linalg.norm(positive)
+        negative = negative / np.linalg.norm(negative)
+
+        # Convert similarity to distance (1 - cosine similarity)
+        d_ap: float = 1.0 - float(np.dot(anchor, positive))
+        d_an: float = 1.0 - float(np.dot(anchor, negative))
+    else:
+        # Euclidean (L2) distance
+        d_ap: float = float(np.linalg.norm(anchor - positive))
+        d_an: float = float(np.linalg.norm(anchor - negative))
+
+    loss: float = max(0.0, d_ap - d_an + margin)
+    return loss
 
 
 if __name__ == "__main__":

@@ -41,7 +41,7 @@ def add_identities_with_m_gallery_images(m: int, gallery_min_images: int):
             requests.post("http://localhost:3000/add", files={"image": open(image_path, "rb")}, data={"name": file[:-4]})
 
 
-def query_probes_with_m_gallery_images(gallery_min_images: int, k: int = 1) -> List[List[bool]]:
+def query_probes_with_m_gallery_images(gallery_min_images: int, k: int = 3) -> List[List[bool]]:
     res = []
 
     for identity in get_galleries_with_min_images(gallery_min_images):
