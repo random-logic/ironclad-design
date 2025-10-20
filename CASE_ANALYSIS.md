@@ -156,8 +156,21 @@ From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 1
 
 # 5 - Uncertainty Estimation
 
+
 ### Behavior in Image Space
 
+| Name                | Large Brightness / Contrast Difference | Pose / Expression Variation | Unique Face Shape? | mAP  |
+|---------------------|----------------------------------------|-----------------------------|--------------------|------|
+| Inam-ul-Haq         | Y                                      | Y                           | N                  | Low  |
+| Mark Cuban          | Y                                      | Y                           | N                  | Low  |
+| Carl Reiner         | Y                                      | N                           | N                  | Low  |
+| Demetrius Ferraciu  | N                                      | Y                           | N                  | Low  |
+| Max Mayfield        | Y                                      | Y                           | N                  | Low  |
+| Bobby Goldwater     | N                                      | N                           | N                  | High |
+| Yoko Ono            | N                                      | N                           | N                  | High |
+| Slobodan Milosevic  | N                                      | N                           | N                  | High |
+| Saeb Erekat         | M                                      | M                           | Y                  | High |
+| Richard Branson     | M                                      | M                           | Y                  | High |
 
 ### Behavior in Embedding Space
 ![Returned Distances By Performance Groups](imgs/task5-distances.png)
