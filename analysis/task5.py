@@ -31,26 +31,6 @@ def get_identities_with_lowest_and_highest_ap_k(samples: Sequence[Tuple[str, Seq
     return identities_with_lowest, identities_with_highest, lowest_ap, highest_ap
 
 
-def query_probe(image_path: str, k: int = 5) -> Tuple[List[str], List[float]]:
-    r = requests.post("http://localhost:3000/identify",
-                      files={"image": open(image_path, 'rb')},
-                      data={"k": str(k)})
-    return r.json()["ranked identities"], r.json()["distances"]
-
-
-def query_probes_with_identity(k: int = 1) -> List[Tuple[str, List[bool], List[float]]]:
-    res = []
-
-    for identity in get_identities_from(PROBE_DIR):
-        identity_path = os.path.join(PROBE_DIR, identity)
-        for file in os.listdir(identity_path):
-            image_path = os.path.join(identity_path, file)
-            q_res = query_probe(image_path, k=k)
-            res.append((identity, [identity == file_name[:-5] for file_name, _ in q_res], q_res[-1]))
-
-    return res
-
-
 # TODO - keep?
 def compute_triplet_loss(
     anchor: np.ndarray,

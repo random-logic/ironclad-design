@@ -133,7 +133,7 @@ Across Tables 3-1 to 3-6, a clear pattern emerges. CASIA-WebFace benefits from r
 
 When comparing indexing methods, both Brute Force and HNSW achieve similar accuracy–latency tradeoffs, yielding the same optimal $N$ within each model. However, the LSH index requires a larger $N$ (three times higher) to compensate for its approximate search nature and lower retrieval precision. In practice, this means setting $N = 1$ for VGGFace2 (Brute Force or HNSW) and $N = 2$ for CASIA-WebFace (Brute Force or HNSW). When using LSH indexing, $N$ is tripled. These choices balance retrieval accuracy and query efficiency given the probe–gallery characteristics of the provided dataset.
 
-# 4
+# 4 - Optimizing Number Images in Gallery
 Let $m$ represent the number of images each individual has in the gallery. To determine the optimal $m$, we compared performance (mAP) across different $m$ values. To ensure a fair and controlled experiment, we included only individuals with at least $n$ images, where $m \leq n$, so that variations in accuracy were not caused by adding more individuals. To also account for those with fewer images, we repeated this experiment for multiple values of $n$. We also control the indexing method (Brute Force) and the number of relevant results returned ($N = 1$ as this is the optimal value found in section 3).
 
 ### VGGFace
@@ -154,6 +154,8 @@ Interestingly, $m = 3$ or $m = 4$ works best for individuals who already have ma
 
 From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 10$). In all cases, increasing $m$ led to higher accuracy gain. Diminishing returns starts to be noticeable after $m = 5$, but there is still significant gain to be had for increasing $m$. For example, increasing $m$ from 5 to 10 for those with 10 images seen an mAP increase of approximately $0.1$.
 
-# 5
+# 5 - Uncertainty Estimation
+
+
 
 TODO
