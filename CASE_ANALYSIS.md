@@ -158,6 +158,7 @@ From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 1
 
 
 ### Behavior in Image Space
+**Table 5-1.** The effect of image characteristic differences on the mAP. These results were obtained from manual inspection of images with the lowest and highest mAPs.
 
 | Name                | Large Brightness / Contrast Difference | Pose / Expression Variation | Unique Face Shape? | mAP  |
 |---------------------|----------------------------------------|-----------------------------|--------------------|------|
@@ -173,6 +174,8 @@ From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 1
 | Richard Branson     | M                                      | M                           | Y                  | High |
 
 ### Behavior in Embedding Space
+**Table 5-2.** The effect of mAP (lowest or highest performing) on the distance to predicted target.
+
 ![Returned Distances By Performance Groups](imgs/task5-distances.png)
 
 ### Strategy to Improve Performance
