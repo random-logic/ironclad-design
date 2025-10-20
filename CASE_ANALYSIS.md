@@ -173,6 +173,8 @@ From Figure 4-2, overall the optimal $m$ seems to be as high as possible ($m = 1
 | Saeb Erekat         | M                                      | M                           | Y                  | High |
 | Richard Branson     | M                                      | M                           | Y                  | High |
 
+Table 5-1 shows that the best performing images (with the highest mAP) usually has low brightness, contrast, pose, or expression variation. Whenever there is moderate differences in brightness, contrast, pose, or expression, these images usually compensate that with unique facial shape, making it easier for the ML model to detect the correct matching face. On the other hand, the worst performing images (with the lowest mAP) has either high brightness, contrast, pose or expression variation face shape uniqueness to compensate for this noise. This means that the model performs best when the faces are captured under consistent illumination and camera conditions with similar expressions and minimal variation in head orientation.
+
 ### Behavior in Embedding Space
 **Table 5-2.** The effect of mAP (lowest or highest performing) on the distance to predicted target.
 
